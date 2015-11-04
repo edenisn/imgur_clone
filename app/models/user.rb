@@ -1,14 +1,12 @@
 class User < ActiveRecord::Base
-  attr_accessor :login
-
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable,
-         authentication_keys: { email: false, login: true }
+         authentication_keys: { email: false, username: true }
 
   validates :username,
-            :presence => true,
-            :uniqueness => {
-                :case_sensitive => false
+            presence: true,
+            uniqueness: {
+                case_sensitive: false
             }
 
   validate :validate_username
@@ -21,14 +19,10 @@ class User < ActiveRecord::Base
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    if conditions[:username].nil?
+      where(conditions).first
     else
-      if conditions[:username].nil?
-        where(conditions).first
-      else
-        where(username: conditions[:username]).first
-      end
+      where(username: conditions[:username]).first
     end
   end
 
@@ -42,7 +36,7 @@ class User < ActiveRecord::Base
 
   def self.new_with_session(params, session)
     if session["devise.user_attributes"]
-      new(session["devise.user_attributes"], without_protection: true) do |user|
+      new(session["devise.user_attributes"]) do |user|
         user.attributes = params
         user.valid?
       end
