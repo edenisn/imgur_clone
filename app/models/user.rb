@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :images, dependent: :destroy
+
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable,
          authentication_keys: { email: false, username: true }

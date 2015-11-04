@@ -21,7 +21,9 @@
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
-      <button type="button" class="btn btn-default navbar-btn">Upload image</button>
+      <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to "Upload image", new_image_path %></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li><p class="navbar-text"><%= current_user.email %></p></li>

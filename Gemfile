@@ -31,6 +31,12 @@ gem 'simple_form'
 gem 'figaro'
 # Use for OmniAuth Twitter with Devise
 gem 'omniauth-twitter'
+# Solution for file uploads
+gem 'carrierwave'
+# An interface to the ImageMagick and GraphicsMagick image processing libraries
+gem 'rmagick'
+# Used to support Amazon S3
+gem 'fog'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
