@@ -1,5 +1,3 @@
-require 'file_size_validator'
-
 class Image < ActiveRecord::Base
   belongs_to :user
 
@@ -8,8 +6,8 @@ class Image < ActiveRecord::Base
   validates :name, presence: true
 
   validates :attachment,
-            :presence => true,
-            :file_size => {
-                :maximum => 5.megabytes.to_i
+            presence: true,
+            file_size: {
+                less_than: 5.megabytes
             }
 end

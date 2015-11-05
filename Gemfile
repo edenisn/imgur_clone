@@ -35,8 +35,10 @@ gem 'omniauth-twitter'
 gem 'carrierwave'
 # An interface to the ImageMagick and GraphicsMagick image processing libraries
 gem 'rmagick'
+# Adds file validators to ActiveModel
+gem 'file_validators'
 # Used to support Amazon S3
-gem 'fog'
+gem 'carrierwave-aws'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
