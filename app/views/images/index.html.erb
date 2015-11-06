@@ -8,7 +8,6 @@
     <th>Attachment</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
   </thead>
 
@@ -18,7 +17,6 @@
         <td><%= image.name %></td>
         <td><%= image.description %></td>
         <td><%= image_tag image.attachment_url(:thumb) if image.attachment? %></td>
-        <td><%= image.attachment_url %></td>
         <td><%= social_share_button_tag(image.name, url: "#{image.attachment_url}") %></td>
         <td><%= link_to "Edit", edit_image_path(image) %></td>
         <td><%= link_to "Delete", image_path(image),
