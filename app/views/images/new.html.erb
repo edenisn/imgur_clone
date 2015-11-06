@@ -1,0 +1,3 @@
+<h3>Upload image</h3>
+<%= render "form", image: @image %>
+<%= link_to_if current_user, "All images", images_path %>

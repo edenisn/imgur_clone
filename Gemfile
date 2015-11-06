@@ -27,6 +27,18 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 # Rails forms made easy
 gem 'simple_form'
+# Use for Simple Rails app configuration
+gem 'figaro'
+# Use for OmniAuth Twitter with Devise
+gem 'omniauth-twitter'
+# Solution for file uploads
+gem 'carrierwave'
+# An interface to the ImageMagick and GraphicsMagick image processing libraries
+gem 'rmagick'
+# Adds file validators to ActiveModel
+gem 'file_validators'
+# Used to support Amazon S3
+gem 'carrierwave-aws'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

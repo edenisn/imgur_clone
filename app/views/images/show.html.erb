@@ -1,0 +1,13 @@
+<h3>Image id: <%= @image.id %></h3>
+<p>
+  <label>Name</label>
+  <%= @image.name %>
+</p>
+<p>
+  <label>Description</label>
+  <%= @image.description %>
+</p>
+<p>
+  <%= image_tag @image.attachment_url(:thumb) if @image.attachment %>
+</p>
+<%= link_to_if current_user, "All images", images_path %>

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -21,10 +21,21 @@
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
-      <button type="button" class="btn btn-default navbar-btn">Upload image</button>
+      <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to "Upload image", new_image_path %></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li><p class="navbar-text"><%= current_user.email %></p></li>
+          <li>
+            <p class="navbar-text">
+            <% if current_user.email.present? %>
+              <%= current_user.email %>
+            <% else %>
+              <%= current_user.username %>
+            <% end %>
+            </p>
+          </li>
+          <li><%= link_to "Edit profile", edit_user_registration_path %></li>
           <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "Sign up", new_user_registration_path %></li>
