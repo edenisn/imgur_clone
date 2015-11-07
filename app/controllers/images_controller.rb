@@ -2,7 +2,11 @@ class ImagesController < ApplicationController
   before_action :find_image, only: [:show, :edit, :update, :destroy]
 
   def index
-    @images = current_user.images.all
+    if current_user
+      @images = current_user.images.all
+    else
+      @images = Image.where("user_id is NULL")
+    end
   end
 
   def new
@@ -11,15 +15,9 @@ class ImagesController < ApplicationController
 
   def create
     if current_user
-      @image = current_user.images.new(image_params)
+      @image = current_user.images.create(image_params)
     else
-      @image = Image.new(image_params)
-    end
-
-    if @image.save
-      redirect_to @image, notice: "Image successfully created"
-    else
-      render 'new'
+      @image = Image.create(image_params)
     end
   end
 
@@ -44,7 +42,7 @@ class ImagesController < ApplicationController
 
   private
     def image_params
-      params.require(:image).permit(:user_id, :name, :description, :attachment)
+      params.require(:image).permit(:user_id, :name, :description, :attachment, :attachment_cache)
     end
 
     def find_image
