@@ -14,4 +14,8 @@ class Image < ActiveRecord::Base
   def default_name
     self.name ||= File.basename(attachment.filename, '.*').titleize if attachment
   end
+
+  def self.search(query)
+    where("description like ?", "%#{query}%")
+  end
 end
