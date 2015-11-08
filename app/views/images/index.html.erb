@@ -16,6 +16,10 @@
 </script>
 
 <div id="images">
-  <%= render @images %>
+  <% if @images.present? %>
+    <%= render @images %>
+  <% else %>
+    <p>There are no descriptions containing the tag(s) <%= params[:search] %>.</p>
+  <% end %>
 </div>
 <div class="clear"></div>
