@@ -39,6 +39,8 @@ gem 'rmagick'
 gem 'file_validators'
 # Used to support Amazon S3
 gem 'carrierwave-aws'
+gem 'social-share-button'
+gem 'jquery-fileupload-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
