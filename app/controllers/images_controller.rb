@@ -3,11 +3,13 @@ class ImagesController < ApplicationController
   before_action :find_image, only: [:show, :edit, :update, :destroy]
 
   def index
-    if current_user
-      @images = current_user.images.all
-    else
-      @images = Image.where("user_id is NULL")
-    end
+    @images = if params[:search]
+                Image.search(params[:search]).order("created_at DESC")
+              elsif current_user
+                current_user.images.all
+              else
+                Image.where(user_id: nil)
+              end
   end
 
   def new
