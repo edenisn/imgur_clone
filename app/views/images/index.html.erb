@@ -3,9 +3,7 @@
 <%= simple_form_for Image.new do |f| %>
   <%= f.input :description, hint: "description image" %>
   <%= f.label :attachment, "Upload image:" %>
-  <%= image_tag(Image.new.attachment_url(:thumb)) if Image.new.attachment? %>
   <%= f.file_field :attachment %>
-  <%= f.hidden_field :attachment_cache %>
 <% end %>
 
 <script id="template-upload" type="text/x-tmpl">

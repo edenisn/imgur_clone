@@ -1,4 +1,5 @@
 class ImagesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :create]
   before_action :find_image, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -42,7 +43,7 @@ class ImagesController < ApplicationController
 
   private
     def image_params
-      params.require(:image).permit(:user_id, :name, :description, :attachment, :attachment_cache)
+      params.require(:image).permit(:user_id, :name, :description, :attachment)
     end
 
     def find_image
