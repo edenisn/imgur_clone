@@ -3,10 +3,12 @@ class ImagesController < ApplicationController
   before_action :find_image, only: [:show, :edit, :update, :destroy]
 
   def index
-    @images = if params[:search]
-                Image.search(params[:search]).order("created_at DESC")
+    @images = if current_user && params[:search]
+                current_user.images.search(params[:search]).order("created_at DESC")
               elsif current_user
                 current_user.images.all
+              elsif !current_user && params[:search]
+                Image.search(params[:search]).where(user_id: nil).order("created_at DESC")
               else
                 Image.where(user_id: nil)
               end
@@ -18,9 +20,17 @@ class ImagesController < ApplicationController
 
   def create
     if current_user
-      @image = current_user.images.create(image_params)
+      @image = current_user.images.new(image_params)
     else
-      @image = Image.create(image_params)
+      @image = Image.new(image_params)
+    end
+
+    respond_to do |format|
+      if @image.save
+        format.js { render inline: "location.reload();" }
+      else
+        format.js { render inline: "location.reload();" }
+      end
     end
   end
 
