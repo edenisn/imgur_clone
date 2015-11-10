@@ -5,11 +5,11 @@ class AdminChartsController < ApplicationController
     @user = User.find_by(username: user_params[:username])
     if @user
       @images = if user_params[:content_type].present?
-                  @user.images.where("created_at <= ? AND content_type = ?", user_params[:upload_date], user_params[:content_type])
+                  @user.images.upload_images_before_day_and_by_content_type(user_params[:upload_date], user_params[:content_type])
                 elsif (user_params[:file_size_1] && user_params[:file_size_2]).present?
-                  @user.images.where("file_size >= ? AND file_size <= ?", user_params[:file_size_1], user_params[:file_size_2])
+                  @user.images.upload_images_between_size_of_image(user_params[:file_size_1], user_params[:file_size_2])
                 else
-                  @user.images.where("created_at <= ?", user_params[:upload_date])
+                  @user.images.upload_images_before_day(user_params[:upload_date])
                 end
     end
 

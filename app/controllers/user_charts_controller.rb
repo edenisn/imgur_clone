@@ -3,9 +3,7 @@ class UserChartsController < ApplicationController
 
   def index
     if user_params[:upload_date]
-      day = Date.parse(user_params[:upload_date])
-      @images = current_user.images.where("created_at >= ? AND created_at <= ?",
-                                          day.beginning_of_day, day.end_of_day)
+      @images = current_user.images.upload_images_by_hour_of_day(Date.parse(user_params[:upload_date]))
     end
 
     @images ||= []
