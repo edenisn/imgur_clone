@@ -4,6 +4,7 @@
   <title>Imgur-Clone</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -23,6 +24,13 @@
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
       <ul class="nav navbar-nav navbar-left">
         <li><%= link_to "Upload image", images_path %></li>
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <li><%= link_to "Charts", new_admin_chart_path %></li>
+          <% else %>
+            <li><%= link_to "Charts", new_user_chart_path %></li>
+          <% end %>
+        <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>

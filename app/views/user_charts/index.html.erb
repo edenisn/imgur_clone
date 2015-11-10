@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-xs-6">
+    <h3>Upload images by hour of day</h3>
+    <%= column_chart @images.group_by_hour_of_day(:created_at, format: "%l %P").count %>
+  </div>
+
+  <div class="col-xs-6">
+    <h3>Upload images by day of week</h3>
+    <%= line_chart @images.group_by_day(:created_at, range: 1.weeks.ago.midnight..Time.now).count %>
+  </div>
+</div>

@@ -1,14 +1,18 @@
-# encoding: utf-8
+require 'carrierwave/processing/mime_types'
 
 class AttachmentUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
+  include CarrierWave::MimeTypes
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
   storage :aws
+
+  process :set_content_type
+  process :save_content_type_and_size_in_model
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -41,13 +45,13 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     process resize_to_fill: [200, 200]
   end
 
-  version :medium do
-    process resize_to_fill: [300, 300]
-  end
+  #version :medium do
+  #  process resize_to_fill: [300, 300]
+  #end
 
-  version :mini do
-    process resize_to_fill: [100, 100]
-  end
+  #version :mini do
+  #  process resize_to_fill: [100, 100]
+  #end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
@@ -57,5 +61,10 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   def extension_white_list
     %w(jpg jpeg gif png)
+  end
+
+  def save_content_type_and_size_in_model
+    model.content_type = file.content_type if file.content_type
+    model.file_size = file.size
   end
 end
