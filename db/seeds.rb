@@ -19,6 +19,9 @@ end
                   created_at: Time.gm(2015, "jun", "#{j}", "#{j}", "#{j}", 30, 50), user_id: i)
     Image.create!(name: "devil#{j}", description: "devil#{j}", attachment: seed_image("devil#{j}", "gif"),
                   created_at: Time.gm(2015, "aug", "#{j}", "#{j}", "#{j}", 30, 50), user_id: i)
-    Image.create!(name: "ruby#{j}", description: "ruby#{j}", attachment: seed_image("ruby#{j}", "jpeg"), user_id: i)
+    Image.create!(name: "ruby#{j}", description: "ruby#{j}", attachment: seed_image("ruby#{j}", "jpeg"),
+                  created_at: Time.gm(2015, "feb", "#{j}", "#{j}", "#{j}", 30, 50), user_id: i)
   end
 end
+
+
