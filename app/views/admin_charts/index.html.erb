@@ -1,0 +1,34 @@
+<% if @user.present? %>
+  <h2>User: <%= @user.username %></h2>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>Upload images by days</h3>
+      <%= line_chart @images.group_by_day(:created_at).count %>
+    </div>
+    <div class="col-xs-6">
+      <h3>Upload images by content types</h3>
+      <%= pie_chart @images.group(:content_type).count %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>Upload images by size</h3>
+      <%= column_chart @images.group(:file_size).count %>
+    </div>
+    <div class="col-xs-6">
+      <h3>Upload all images in db by weeks</h3>
+      <%= line_chart Image.group_by_week(:created_at).count %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>Count of uploads by images tags</h3>
+      <%= column_chart Image.group(:description).count %>
+    </div>
+  </div>
+<% else %>
+    <p>No user with this username in database.</p>
+<% end %>

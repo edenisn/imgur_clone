@@ -39,8 +39,14 @@ gem 'rmagick'
 gem 'file_validators'
 # Used to support Amazon S3
 gem 'carrierwave-aws'
+# Use for post on twitter
 gem 'social-share-button'
+# Use for upload files with pb
 gem 'jquery-fileupload-rails'
+# Create beautiful Javascript charts with one line of Ruby
+gem 'chartkick'
+# Use to group temporal data
+gem 'groupdate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

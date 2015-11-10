@@ -1,21 +1,16 @@
 Rails.application.routes.draw do
-  get 'admins/dashboard'
-
-  get 'users/dashboard'
-
   resources :images
+  resources :user_charts
+  resources :admin_charts
 
   devise_for :admins
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
-  get 'dashboard' => 'users#dashboard', as: "user_dashboard"
-  get 'dashboard' => 'admins#dashboard', as: "admin_dashboard"
-  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  root 'images#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
