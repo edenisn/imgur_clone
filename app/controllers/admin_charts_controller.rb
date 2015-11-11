@@ -5,11 +5,11 @@ class AdminChartsController < ApplicationController
     @user = User.find_by(username: user_params[:username])
     if @user
       @images = if user_params[:content_type].present?
-                  @user.images.where("created_at <= ? AND content_type = ?", user_params[:upload_date], user_params[:content_type])
-                elsif (user_params[:file_size_1] && user_params[:file_size_2]).present?
-                  @user.images.where("file_size >= ? AND file_size <= ?", user_params[:file_size_1], user_params[:file_size_2])
+                  @user.images.uploads_before_day_and_by_content_type(user_params[:upload_date], user_params[:content_type])
+                elsif (user_params[:file_size_min] && user_params[:file_size_max]).present?
+                  @user.images.uploads_size_between(user_params[:file_size_min], user_params[:file_size_max])
                 else
-                  @user.images.where("created_at <= ?", user_params[:upload_date])
+                  @user.images.uploads_before_day(user_params[:upload_date])
                 end
     end
 
@@ -21,6 +21,6 @@ class AdminChartsController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:username, :upload_date, :content_type, :file_size_1, :file_size_2)
+      params.require(:user).permit(:username, :upload_date, :content_type, :file_size_min, :file_size_max)
     end
 end
