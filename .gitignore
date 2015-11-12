@@ -8,6 +8,7 @@ config/database.yml
 app/assets/images/*
 test/fixtures/files/*
 test/fixtures/uploads/*
+public/uploads/*
 # Ignore bundler config.
 /.bundle
 
