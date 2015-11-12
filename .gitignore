@@ -5,6 +5,9 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 config/database.yml
 .idea
+app/assets/images/*
+test/fixtures/files/*
+test/fixtures/uploads/*
 # Ignore bundler config.
 /.bundle
 
