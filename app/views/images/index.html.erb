@@ -4,6 +4,7 @@
   <%= f.input :description, hint: "description image" %>
   <%= f.label :attachment, "Upload image:" %>
   <%= f.file_field :attachment %>
+  <%= f.hidden_field :attachment_cache %>
 <% end %>
 
 <script id="template-upload" type="text/x-tmpl">

@@ -3,4 +3,4 @@
 user1:
   username: john
   email: john@test.com
-  encrypted_password: 12345678
+  encrypted_password: <%= Devise::Encryptor.digest(User, '12345678') %>

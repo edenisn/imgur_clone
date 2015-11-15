@@ -8,6 +8,10 @@ class CarrierWave::Mount::Mounter
   end
 end
 
+class ActionController::TestCase
+  include Devise::TestHelpers
+end
+
 class ActiveSupport::TestCase
   include ActionDispatch::TestProcess
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
