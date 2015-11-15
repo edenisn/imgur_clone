@@ -14,10 +14,6 @@ class ImagesController < ApplicationController
               end
   end
 
-  def new
-    @image = Image.new
-  end
-
   def create
     if current_user
       @image = current_user.images.new(image_params)
@@ -29,7 +25,7 @@ class ImagesController < ApplicationController
       if @image.save
         format.js { render inline: "location.reload();" }
       else
-        format.js { render inline: "location.reload();" }
+        format.js
       end
     end
   end
@@ -55,7 +51,7 @@ class ImagesController < ApplicationController
 
   private
     def image_params
-      params.require(:image).permit(:user_id, :name, :description, :attachment)
+      params.require(:image).permit(:user_id, :name, :description, :attachment, :attachment_cache)
     end
 
     def find_image

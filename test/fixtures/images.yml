@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+image1: # generated id: 952999639
+  user: user1
+  name: test_image
+  description: test_descr
+  attachment: 'test.jpg'
+  file_size: 20000
+  content_type: 'image/jpeg'
+
+

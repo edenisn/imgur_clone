@@ -9,7 +9,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
-  storage :aws
+  # storage :aws
 
   process :set_content_type
   process :save_content_type_and_size_in_model
