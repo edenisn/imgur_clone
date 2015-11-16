@@ -1,0 +1,7 @@
+.row
+  .col-xs-6
+    %h3 Upload images by hour of day
+    = column_chart @images.group_by_hour_of_day(:created_at, format: "%l %P").count
+  .col-xs-6
+    %h3 Upload images by day of week
+    = line_chart @images.group_by_day(:created_at, range: 1.weeks.ago.midnight..Time.now).count

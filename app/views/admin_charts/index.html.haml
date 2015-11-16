@@ -1,0 +1,23 @@
+- if @user.present?
+  %h2
+    User: #{@user.username}
+  .row
+    .col-xs-6
+      %h3 Upload images by days
+      = line_chart @images.group_by_day(:created_at).count
+    .col-xs-6
+      %h3 Upload images by content types
+      = pie_chart @images.group(:content_type).count
+  .row
+    .col-xs-6
+      %h3 Upload images by size
+      = column_chart @images.group(:file_size).count
+    .col-xs-6
+      %h3 Upload all images in db by weeks
+      = line_chart Image.group_by_week(:created_at).count
+  .row
+    .col-xs-12
+      %h3 Count of uploads by images tags
+      = column_chart Image.group(:description).count
+- else
+  %p No user with this username in database.

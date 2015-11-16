@@ -1,0 +1,9 @@
+%p
+  %label Name
+  = @image.name
+%p
+  %label Description
+  = @image.description
+%p
+  = image_tag @image.attachment_url(:thumb) if @image.attachment
+= link_to_if current_user, "All images", images_path
