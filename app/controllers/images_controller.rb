@@ -50,16 +50,15 @@ class ImagesController < ApplicationController
   end
 
   def thumb
-    width = params[:new_size].split("x")[0].to_i
-    height = params[:new_size].split("x")[1].to_i
+    width = processing_params[0]
+    height = processing_params[1]
 
-    @img_resize = ImagePreview.image_resize(@image.attachment, width, height)
-    file_path = "public/previews/#{params[:id]}_#{width}_#{height}.jpg"
-    @img_resize.write(file_path)
+    @image_preview = ImagePreview.resize(@image.attachment, width, height)
+    @image_preview.write(ImagePreview.file_path(params[:id], width, height))
 
-    ImagePreview.store_to_s3(file_path)
+    ImagePreview.store_to_s3(params[:id], width, height)
 
-    send_data @img_resize.to_blob, type: 'image/jpg', disposition: 'inline'
+    send_data @image_preview.to_blob, type: 'image/jpg', disposition: 'inline'
   end
 
   private
@@ -69,5 +68,11 @@ class ImagesController < ApplicationController
 
     def find_image
       @image = Image.find(params[:id])
+    end
+
+    def processing_params
+      width = params[:new_size].split("x")[0].to_i
+      height = params[:new_size].split("x")[1].to_i
+      [width, height]
     end
 end

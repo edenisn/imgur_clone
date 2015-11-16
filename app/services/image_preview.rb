@@ -1,23 +1,25 @@
 class ImagePreview
-  def self.image_resize(image, width, height)
-    img = Magick::Image.read(image).first
-    new_img = img.resize(width, height)
-    new_img
+  def self.resize(image, width, height)
+    image = Magick::Image.read(image).first
+    new_image = image.resize(width, height)
+    new_image
   end
 
-  def self.store_to_s3(file_path)
-    preview = Preview.find_by(filename: File.basename(file_path))
+  def self.file_path(preview_id, width, height)
+    path = "public/previews/#{preview_id}_#{width}_#{height}.jpg"
+  end
+
+  def self.store_to_s3(preview_id, width, height)
+    path = file_path(preview_id, width, height)
+
+    preview = Preview.find_by(filename: File.basename(path))
 
     unless preview
-      Preview.create!(filename: File.basename(file_path))
+      Preview.create!(filename: File.basename(path))
 
-      AWS::S3::DEFAULT_HOST.replace("s3-ap-southeast-1.amazonaws.com")
-      AWS::S3::Base.establish_connection!(access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
-                                          secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'))
-
-      AWS::S3::S3Object.store(File.basename(file_path),
-                              File.open(File.join(Rails.root, file_path)),
-                              'images-cache')
+      s3 = Aws::S3::Resource.new(region:'ap-southeast-1')
+      object_upload = s3.bucket('images-cache').object(File.basename(path))
+      object_upload.upload_file(File.open(File.join(Rails.root, path)))
     end
   end
 end
