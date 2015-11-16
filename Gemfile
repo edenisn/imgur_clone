@@ -47,6 +47,7 @@ gem 'jquery-fileupload-rails'
 gem 'chartkick'
 # Use to group temporal data
 gem 'groupdate'
+gem 'aws-s3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

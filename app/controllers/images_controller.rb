@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :create]
-  before_action :find_image, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :create, :thumb]
+  before_action :find_image, only: [:show, :edit, :update, :destroy, :thumb]
 
   def index
     @images = if current_user && params[:search]
@@ -47,6 +47,19 @@ class ImagesController < ApplicationController
   def destroy
     @image.destroy
     redirect_to images_path
+  end
+
+  def thumb
+    width = params[:new_size].split("x")[0].to_i
+    height = params[:new_size].split("x")[1].to_i
+
+    @img_resize = ImagePreview.image_resize(@image.attachment, width, height)
+    file_path = "public/previews/#{params[:id]}_#{width}_#{height}.jpg"
+    @img_resize.write(file_path)
+
+    ImagePreview.store_to_s3(file_path)
+
+    send_data @img_resize.to_blob, type: 'image/jpg', disposition: 'inline'
   end
 
   private

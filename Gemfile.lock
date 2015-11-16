@@ -40,6 +40,10 @@ GEM
     autoprefixer-rails (6.0.3)
       execjs
       json
+    aws-s3 (0.6.3)
+      builder
+      mime-types
+      xml-simple
     aws-sdk (2.1.35)
       aws-sdk-resources (= 2.1.35)
     aws-sdk-core (2.1.35)
@@ -199,11 +203,13 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    xml-simple (1.1.5)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-s3
   bootstrap-sass (~> 3.3.5)
   byebug
   carrierwave
