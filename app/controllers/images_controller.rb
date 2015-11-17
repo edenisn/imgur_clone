@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :create]
-  before_action :find_image, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :create, :thumb]
+  before_action :find_image, only: [:show, :edit, :update, :destroy, :thumb]
 
   def index
     @images = if current_user && params[:search]
@@ -49,6 +49,18 @@ class ImagesController < ApplicationController
     redirect_to images_path
   end
 
+  def thumb
+    width = processing_params[0]
+    height = processing_params[1]
+
+    @image_preview = ImagePreview.resize(@image.attachment, width, height)
+    @image_preview.write("public/previews/#{params[:id]}_#{width}_#{height}.jpg")
+
+    ImagePreview.store(params[:id], width, height)
+
+    send_data @image_preview.to_blob, type: 'image/jpg', disposition: 'inline'
+  end
+
   private
     def image_params
       params.require(:image).permit(:user_id, :name, :description, :attachment, :attachment_cache)
@@ -56,5 +68,11 @@ class ImagesController < ApplicationController
 
     def find_image
       @image = Image.find(params[:id])
+    end
+
+    def processing_params
+      width = params[:new_size].split("x")[0].to_i
+      height = params[:new_size].split("x")[1].to_i
+      [width, height]
     end
 end

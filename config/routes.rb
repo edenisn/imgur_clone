@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :images
+  get 'images/:id/thumb/:new_size' => 'images#thumb'
   resources :user_charts
   resources :admin_charts
 

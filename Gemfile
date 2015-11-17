@@ -47,9 +47,14 @@ gem 'jquery-fileupload-rails'
 gem 'chartkick'
 # Use to group temporal data
 gem 'groupdate'
+# Use haml in project
 gem 'haml', '~> 4.0.5'
+# Use for uploads preview images to S3
+gem 'aws-sdk', '~>2'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+
+gem 'rails_12factor', group: :production
 
 # Use Unicorn as the app server
 # gem 'unicorn'
