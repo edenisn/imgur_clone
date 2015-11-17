@@ -10,7 +10,7 @@ Admin.create!(username: "admin", email: "admin@imgurcloneapp.heroku.com",
               password: "admin123", password_confirmation: "admin123")
 
 def seed_image(file_name, filename_extension)
-  File.open(File.join(Rails.root, "/tmp/build_d0c3e09e06aa3677381c6ece4920a617/public/assets/seed/#{filename_extension}/#{file_name}.#{filename_extension}"))
+  File.open(File.join(Rails.root, "/app/tmp/build_d0c3e09e06aa3677381c6ece4920a617/public/assets/seed/#{filename_extension}/#{file_name}.#{filename_extension}"))
 end
 
 1.upto(30) do |i|
