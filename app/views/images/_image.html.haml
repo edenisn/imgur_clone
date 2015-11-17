@@ -1,0 +1,9 @@
+.image
+  = link_to image_tag(image.attachment_url(:thumb)), image if image.attachment?
+  .name= image.name
+  .social
+    = social_share_button_tag(image.name, url: "#{image.attachment_url}")
+  .actions
+    = link_to "edit", edit_image_path(image)
+    |
+    \#{link_to "remove", image, confirm: 'Are you sure?', method: :delete}

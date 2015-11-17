@@ -1,0 +1,8 @@
+= simple_form_for image, html: { multipart: true } do |f|
+  = f.input :name
+  = f.input :description
+  = f.file_field :attachment
+  = f.hidden_field :attachment_cache
+  = f.hint 'jpeg, jpg, gif and png only, please!'
+  = f.hint 'Maximum 5 Mb or less file size!'
+  = f.button :submit, "Update"

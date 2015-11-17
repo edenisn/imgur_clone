@@ -1,0 +1,17 @@
+%h1 Images
+= simple_form_for Image.new do |f|
+  = f.input :description, hint: "description image"
+  = f.label :attachment, "Upload image:"
+  = f.file_field :attachment
+  = f.hidden_field :attachment_cache
+%script#template-upload{:type => "text/x-tmpl"}
+  .upload
+    {%=o.name%}
+    .progress
+      .bar{:style => "width: 0%"}
+#images
+  - if @images.present? || params[:search].present?
+    = render @images
+  - else
+    %p There are no images!
+.clear

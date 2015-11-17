@@ -48,7 +48,6 @@ gem 'chartkick'
 # Use to group temporal data
 gem 'groupdate'
 gem 'haml', '~> 4.0.5'
-gem 'aws-sdk', '~> 2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
