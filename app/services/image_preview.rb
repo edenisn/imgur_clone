@@ -5,21 +5,17 @@ class ImagePreview
     new_image
   end
 
-  def self.file_path(preview_id, width, height)
-    path = "public/previews/#{preview_id}_#{width}_#{height}.jpg"
-  end
+  def self.store(preview_id, width, height)
+    file_path = "public/previews/#{preview_id}_#{width}_#{height}.jpg"
 
-  def self.store_to_s3(preview_id, width, height)
-    path = file_path(preview_id, width, height)
-
-    preview = Preview.find_by(filename: File.basename(path))
+    preview = Preview.find_by(filename: File.basename(file_path))
 
     unless preview
-      Preview.create!(filename: File.basename(path))
+      Preview.create!(filename: File.basename(file_path))
 
-      s3 = Aws::S3::Resource.new(region:'ap-southeast-1')
-      object_upload = s3.bucket('images-cache').object(File.basename(path))
-      object_upload.upload_file(File.open(File.join(Rails.root, path)))
+      s3 = Aws::S3::Resource.new(region: ENV['AWS_REGION_FOR_CACHE'])
+      object_upload = s3.bucket('images-cache').object(File.basename(file_path))
+      object_upload.upload_file(File.open(File.join(Rails.root, file_path)))
     end
   end
 end

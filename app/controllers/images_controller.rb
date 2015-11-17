@@ -54,9 +54,9 @@ class ImagesController < ApplicationController
     height = processing_params[1]
 
     @image_preview = ImagePreview.resize(@image.attachment, width, height)
-    @image_preview.write(ImagePreview.file_path(params[:id], width, height))
+    @image_preview.write("public/previews/#{params[:id]}_#{width}_#{height}.jpg")
 
-    ImagePreview.store_to_s3(params[:id], width, height)
+    ImagePreview.store(params[:id], width, height)
 
     send_data @image_preview.to_blob, type: 'image/jpg', disposition: 'inline'
   end
