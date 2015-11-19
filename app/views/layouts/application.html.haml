@@ -21,7 +21,7 @@
             %li= link_to "Upload image", images_path
             - if user_signed_in?
               - if current_user.admin?
-                %li= link_to "Charts", new_admin_chart_path
+                %li= link_to "Charts", admin_dashboard_path
               - else
                 %li= link_to "Charts", new_user_chart_path
           %ul.nav.navbar-nav.navbar-right

@@ -25,7 +25,7 @@ class ImagesController < ApplicationController
       if @image.save
         format.js { render inline: "location.reload();" }
       else
-        format.js
+        format.js { render inline: "location.reload();" }
       end
     end
   end
