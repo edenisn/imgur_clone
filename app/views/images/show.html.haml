@@ -1,9 +1,11 @@
 %p
-  %label Name
+  %label Name:
   = @image.name
 %p
-  %label Description
+  %label Description:
   = @image.description
 %p
   = image_tag @image.attachment_url(:thumb) if @image.attachment
 = link_to_if current_user, "All images", images_path
+
+%p.text-warning If you want to see dynamic preview image, please, add /thumb/200x200 (width and height of image) to url
