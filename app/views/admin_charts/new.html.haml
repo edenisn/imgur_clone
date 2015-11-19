@@ -6,6 +6,6 @@
   = f.input :content_type, as: :select,
             collection: [['image/jpeg', 'image/jpeg'], ['image/gif', 'image/gif'], ['image/png', 'image/png']],
             required: false
-  = f.input :file_size_min, placeholder: 3000, hint: "file size between", required: false
-  = f.input :file_size_max, placeholder: 25000, required: false
+  = f.input :file_size_min, placeholder: "3000", hint: "file size between", required: false
+  = f.input :file_size_max, placeholder: "25000", required: false
   = f.button :submit, "Show uploads"

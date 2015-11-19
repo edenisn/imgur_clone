@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :create]
+  before_action :authenticate_user!, except: [:index, :create, :thumb]
   before_action :find_image, only: [:show, :edit, :update, :destroy, :thumb]
 
   def index
