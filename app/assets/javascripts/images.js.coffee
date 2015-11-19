@@ -3,9 +3,18 @@ jQuery ->
     dataType: "script"
     add: (e, data) ->
       file = data.files[0]
-      data.context = $(tmpl("template-upload", file))
-      $('#new_image').append(data.context)
-      data.submit()
+
+      if file
+        reader = new FileReader()
+
+        reader.onload = (e) ->
+          $('#image_preview').attr('src', e.target.result)
+
+        reader.readAsDataURL(file);
+
+        data.context = $(tmpl("template-upload", file))
+        $('#new_image').append(data.context)
+        data.submit()
 
     progress: (e, data) ->
       if data.context

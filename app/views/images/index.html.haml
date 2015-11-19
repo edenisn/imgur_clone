@@ -1,6 +1,9 @@
 %h1 Images
 = simple_form_for Image.new do |f|
   = f.input :description, hint: "description image"
+  = image_tag "preview.jpg", id: "image_preview"
+  %br
+  %br
   = f.label :attachment, "Upload image:"
   = f.file_field :attachment
   = f.hidden_field :attachment_cache
@@ -11,6 +14,7 @@
     .progress
       .bar{:style => "width: 0%"}
 
+%br
 #images
   - if @images.present? || params[:search].present?
     = render @images
