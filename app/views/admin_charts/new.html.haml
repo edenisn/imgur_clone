@@ -2,7 +2,7 @@
 %p Fill in textfields with username, upload date, content type of image and filesize (min  filesize  max).
 = simple_form_for :user, url: admin_charts_path, method: :get do |f|
   = f.input :username
-  = f.input :upload_date, placeholder: 2010-01-01
+  = f.input :upload_date, placeholder: "2015-01-01"
   = f.input :content_type, as: :select,
             collection: [['image/jpeg', 'image/jpeg'], ['image/gif', 'image/gif'], ['image/png', 'image/png']],
             required: false

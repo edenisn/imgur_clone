@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get 'admins/dashboard'
+
   resources :images
   get 'images/:id/thumb/:new_size' => 'images#thumb'
+  get 'dashboard' => 'admins#dashboard', as: "admin_dashboard"
   resources :user_charts
   resources :admin_charts
 

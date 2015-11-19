@@ -1,5 +1,6 @@
 class UserChartsController < ApplicationController
   before_action :authenticate_user!
+  before_action :validate_date, only: :index
 
   def index
     if user_params[:upload_date]
@@ -15,5 +16,14 @@ class UserChartsController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:upload_date)
+    end
+
+    def validate_date
+      begin
+        Date.parse(user_params[:upload_date])
+      rescue ArgumentError => e
+        flash[:notice] = e.message
+        redirect_to :back
+      end
     end
 end
