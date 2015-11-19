@@ -29,8 +29,8 @@ class AdminChartsController < ApplicationController
     def validate_date
       begin
         Date.parse(user_params[:upload_date])
-      rescue ArgumentError => e
-        flash[:notice] = e.message
+      rescue
+        flash[:notice] = "Invalid date"
         redirect_to :back
       end
     end
