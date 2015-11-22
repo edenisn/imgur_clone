@@ -53,12 +53,16 @@ class ImagesController < ApplicationController
     width = processing_params[0]
     height = processing_params[1]
 
-    @image_preview = ImagePreview.resize(@image.attachment, width, height)
-    @image_preview.write("public/previews/#{params[:id]}_#{width}_#{height}.jpg")
+    if ImagePreview.matches? params[:new_size]
+      @image_preview = ImagePreview.resize(@image.attachment, width, height)
+      @image_preview.write("public/previews/#{params[:id]}_#{width}_#{height}.jpg")
 
-    ImagePreview.store(params[:id], width, height)
+      ImagePreview.store(params[:id], width, height)
 
-    send_data @image_preview.to_blob, type: 'image/jpg', disposition: 'inline'
+      send_data @image_preview.to_blob, type: 'image/jpg', disposition: 'inline'
+    else
+      redirect_to @image, notice: "This sizes are supress"
+    end
   end
 
   private
@@ -71,8 +75,7 @@ class ImagesController < ApplicationController
     end
 
     def processing_params
-      width = params[:new_size].split("x")[0].to_i
-      height = params[:new_size].split("x")[1].to_i
+      width, height = params[:new_size].split("x").map { |s| s.to_i }
       [width, height]
     end
 end

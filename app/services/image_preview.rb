@@ -1,4 +1,15 @@
 class ImagePreview
+  ALLOW_THUMB_SIZES = %w( 100x100 150x200 300x200 200x200 )
+
+  def self.matches?(params)
+    puts params.inspect
+    if ALLOW_THUMB_SIZES.include? params
+      true
+    else
+      false
+    end
+  end
+
   def self.resize(image, width, height)
     image = Magick::Image.read(image).first
     new_image = image.resize(width, height)
