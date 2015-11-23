@@ -1,5 +1,16 @@
 %h2 Admin dashboard
 
+= will_paginate @users
+
+%table{:style => "width:500px"}
+  %thead
+    %tr
+      %th Username
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.username
+
 = link_to "Go to the page with graphic charts", new_admin_chart_url
 %br/
 = link_to "Sign out from admin account", destroy_admin_session_path, method: :delete
