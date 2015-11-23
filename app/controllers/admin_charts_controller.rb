@@ -1,7 +1,5 @@
 class AdminChartsController < ApplicationController
   before_action :authenticate_admin!
-  before_action :validate_date, only: :index
-
   def index
     @user = User.find_by(username: user_params[:username])
 
@@ -24,14 +22,5 @@ class AdminChartsController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:username, :upload_date, :content_type, :file_size_min, :file_size_max)
-    end
-
-    def validate_date
-      begin
-        Date.parse(user_params[:upload_date])
-      rescue
-        flash[:notice] = "Invalid date"
-        redirect_to :back
-      end
     end
 end
