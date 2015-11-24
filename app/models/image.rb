@@ -32,6 +32,12 @@ class Image < ActiveRecord::Base
   end
 
   def self.uploads_size_between(size_min, size_max)
+    if size_min.present? && size_max == ''
+      size_max = 120000
+    elsif size_min == '' && size_max.present?
+      size_min = 0
+    end
+
     where("file_size >= ? AND file_size <= ?", size_min, size_max)
   end
 end
