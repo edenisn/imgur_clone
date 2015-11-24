@@ -2,12 +2,19 @@
 %p Fill in textfields with username, upload date, content type of image and filesize (min  filesize  max).
 = simple_form_for :user, url: admin_charts_path, method: :get do |f|
   = f.input :username
-  = f.input :upload_date, as: :date_time_picker, input_html: { data: { date_format: "YYYY-MM-DD" } }
+  = f.input :upload_date, as: :date_time_picker,
+                          input_html: { data: { date_format: "YYYY-MM-DD" } }
   = f.input :content_type, as: :select,
-            collection: [['image/jpeg', 'image/jpeg'], ['image/gif', 'image/gif'], ['image/png', 'image/png']],
-            required: false
-  = f.input :file_size_min, placeholder: "3000", hint: "file size between", required: false
-  = f.input :file_size_max, placeholder: "25000", required: false
+                           collection: [ 'image/jpeg', 'image/gif', 'image/png' ],
+                           required: false
+  = f.input :file_size_min, as: :select,
+                            collection: [ '5000', '10000', '15000', '20000', '25000' ],
+                            hint: "file size in bytes",
+                            required: false
+  = f.input :file_size_max, as: :select,
+                            collection: [ '30000', '35000', '40000', '45000', '50000', '60000' ],
+                            hint: "file size in bytes",
+                            required: false
   = f.button :submit, "Show uploads"
 
 = link_to "Back", admin_dashboard_path
