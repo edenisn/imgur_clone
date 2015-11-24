@@ -53,8 +53,8 @@ gem 'haml', '~> 4.0.5'
 gem 'aws-sdk', '~>2'
 # Use pagination library
 gem 'will_paginate', '~> 3.0.6'
-# jQuery UI for the Rails asset pipeline
-gem 'jquery-ui-rails'
+# Use bootstrap datetime picker for simple_form
+gem 'datetime_picker_input'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
