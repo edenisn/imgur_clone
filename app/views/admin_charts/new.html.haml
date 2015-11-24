@@ -8,11 +8,11 @@
                            collection: [ 'image/jpeg', 'image/gif', 'image/png' ],
                            required: false
   = f.input :file_size_min, as: :select,
-                            collection: [ '5000', '10000', '15000', '20000', '25000' ],
+                            collection: [ '5000', '10000', '30000', '60000', '100000' ],
                             hint: "file size in bytes",
                             required: false
   = f.input :file_size_max, as: :select,
-                            collection: [ '30000', '35000', '40000', '45000', '50000', '60000' ],
+                            collection: [ '120000', '200000', '300000', '500000', '800000', '1200000' ],
                             hint: "file size in bytes",
                             required: false
   = f.button :submit, "Show uploads"

@@ -40,7 +40,7 @@
           = form_tag(images_path, method: :get, class: "navbar-form navbar-right", id: "search-form") do
             .form-group
               = text_field_tag :search, params[:search], placeholder: "Search images tags"
-            %button.btn.btn-default{:type => "submit"} Search
+            %button.btn.btn-default{ type: "submit" } Search
     #main-container.container
       .row
         .col-sm-12.col-md-12.col-lg-12

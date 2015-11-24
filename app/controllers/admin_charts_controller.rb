@@ -6,7 +6,7 @@ class AdminChartsController < ApplicationController
     if @user
       @images = if user_params[:content_type].present?
                   @user.images.uploads_before_day_and_by_content_type(user_params[:upload_date], user_params[:content_type])
-                elsif (user_params[:file_size_min] && user_params[:file_size_max]).present?
+                elsif user_params[:file_size_min].present? || user_params[:file_size_max].present?
                   @user.images.uploads_size_between(user_params[:file_size_min], user_params[:file_size_max])
                 else
                   @user.images.uploads_before_day(user_params[:upload_date])
