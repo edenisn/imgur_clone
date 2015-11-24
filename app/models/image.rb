@@ -5,6 +5,8 @@ class Image < ActiveRecord::Base
 
   mount_uploader :attachment, AttachmentUploader
 
+  MAX_FILE_SIZE = 4500000 # maximum image size in bytes
+
   validates :attachment,
             presence: true,
             file_size: {
@@ -33,7 +35,7 @@ class Image < ActiveRecord::Base
 
   def self.uploads_size_between(size_min, size_max)
     if size_min.present? && size_max == ''
-      size_max = 120000
+      size_max = MAX_FILE_SIZE
     elsif size_min == '' && size_max.present?
       size_min = 0
     end
