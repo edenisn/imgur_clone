@@ -7,13 +7,11 @@
   = f.input :content_type, as: :select,
                            collection: [ 'image/jpeg', 'image/gif', 'image/png' ],
                            required: false
-  = f.input :file_size_min, as: :select,
-                            collection: [ '5000', '10000', '30000', '60000', '100000' ],
-                            hint: "file size in bytes",
+  = f.input :file_size_min, as: :select, input_html: { class: "combobox" },
+                            collection: Image.order(:file_size).uniq.pluck(:file_size),
                             required: false
-  = f.input :file_size_max, as: :select,
-                            collection: [ '120000', '200000', '300000', '500000', '800000', '1200000' ],
-                            hint: "file size in bytes",
+  = f.input :file_size_max, as: :select, input_html: { class: "combobox" },
+                            collection: Image.order(:file_size).uniq.pluck(:file_size),
                             required: false
   = f.button :submit, "Show uploads"
 
