@@ -1,5 +1,6 @@
 class AdminChartsController < ApplicationController
   before_action :authenticate_admin!
+
   def index
     @user = User.find_by(username: user_params[:username])
 
