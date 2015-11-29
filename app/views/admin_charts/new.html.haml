@@ -1,7 +1,8 @@
 %h2 Statistic charts
 %p Fill in textfields with username, upload date, content type of image and filesize (min  filesize  max).
 = simple_form_for :user, url: admin_charts_path, method: :get do |f|
-  = f.input :username
+  = f.input :username, as: :select, input_html: { class: "combobox" },
+                       collection: User.order(:username).pluck(:username)
   = f.input :upload_date, as: :date_time_picker,
                           input_html: { data: { date_format: "YYYY-MM-DD" } }
   = f.input :content_type, as: :select,
