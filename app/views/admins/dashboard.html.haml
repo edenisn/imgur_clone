@@ -1,17 +1,30 @@
 %h2 Admin dashboard
 
+%br
+= link_to "Go to the page with graphic charts", new_admin_chart_url
+|
+= link_to "Sign out from admin account", destroy_admin_session_path, method: :delete
+%br
+
 = will_paginate @users
 
-%table
+%table.table.table-striped
   %thead
     %tr
-      %th Username
+      %th id
+      %th username
+      %th email
+      %th created at
+      %th updated at
+      %th
+      %th
   %tbody
     - @users.each do |user|
       %tr
+        %td= user.id
         %td= user.username
-
-%br
-= link_to "Go to the page with graphic charts", new_admin_chart_url
-%br/
-= link_to "Sign out from admin account", destroy_admin_session_path, method: :delete
+        %td= user.email
+        %td= user.created_at
+        %td= user.updated_at
+        %td= link_to 'Edit', edit_user_path(user)
+        %td= link_to 'Delete', user_path(user), method: :delete, data: { confirm: "Are you sure?" }
